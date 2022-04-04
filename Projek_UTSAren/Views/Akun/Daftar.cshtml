@@ -1,0 +1,43 @@
+﻿@model User
+
+@{ Layout = "_LayoutAkun"; }
+
+<div class="card-header"><h3 class="text-center font-weight-light my-4">Register</h3></div>
+<div class="card-body">
+    <form asp-action="Daftar">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input class="form-control" asp-for="Username" placeholder="Username"/>
+                    <label for="inputUsername">Username</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input class="form-control" asp-for="Password" placeholder="Password" />
+                    <label for="inputLastName">Password</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-floating mb-3 mb-md-0">
+                    <input class="form-control" asp-for="Nama_Lengkap" placeholder="Nama Lengkap" />
+                    <label for="inputFirstName">Nama Lengkap</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input class="form-control" type="email" asp-for="Email" placeholder="name@example.com" />
+                    <label for="inputLastName">Email</label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 mb-0">
+            <input class="btn btn-primary btn-block" type="submit" value="Sign Up" />
+        </div>
+    </form>
+</div>
+<div class="card-footer text-center py-3">
+    <div class="small"><a asp-action="Masuk">Already Have an Account? Login</a></div>
+</div>

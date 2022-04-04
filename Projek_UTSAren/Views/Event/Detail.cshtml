@@ -1,0 +1,20 @@
+﻿@model List<Event>
+
+@{ Layout = "_LayoutAkun"; }
+
+<h1>Detail Data Event</h1>
+@foreach (var data in ViewBag.details)
+{
+    <p>Id Event       : @data.Id_event </p>
+    <p>Id Angkatan    : @data.Id_angkatan </p>
+    <p>Nama Event     : @data.Nama_event </p>
+    <p>Tanggal        : @data.Tanggal </p>
+    <p>Tempat         : @data.Tempat </p>
+    <p>Waktu          : @data.Waktu </p>
+    <p>Batas Daftar   : @data.Batas_daftar </p>
+    <p>Keterangan     : @data.Keterangan </p>
+    <p>Status         : @data.Status </p>
+}
+<br />
+<br />
+<a asp-action="Index">Kembali</a>

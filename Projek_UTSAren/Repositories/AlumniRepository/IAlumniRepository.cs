@@ -10,6 +10,10 @@ namespace Projek_UTSAren.Repositories.AlumniRepository
 {
     public interface IAlumniRepository
     {   
-        Task<bool> CreateAlumniAsync(Alumni alumni, IFormFile foto);
+        Task<bool> CreateAlumniAsync(Alumni alumni);
+        Task<bool> UpdateAlumniAsync(Alumni alumni);
+        Task<bool> HapusAlumniAsync(Alumni alumni);
+        Task<Alumni> CariAlumniAsync(string id);
+        Task<Alumni> AmbilAlumniBerdasarkanIdAsync(string id);
     }
 }

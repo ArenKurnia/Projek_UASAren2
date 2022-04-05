@@ -34,13 +34,13 @@ namespace Projek_UTSAren.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Alumni parameter, IFormFile Foto)
+        public IActionResult Create(Alumni parameter)
         {
             if (ModelState.IsValid)
             {
-                _alumniService.CreateAlumni(parameter, Foto);
+                _alumniService.CreateAlumni(parameter);
 
-                return RedirectToAction("Index" + parameter.NIM);
+                return RedirectToAction("Index");
             }
             return View(parameter);
         }
@@ -89,14 +89,13 @@ namespace Projek_UTSAren.Controllers
         }
         public IActionResult Detail(string id)
         {
-            var details = new List<Models.Alumni>();
-            var detail = _context.Tb_Alumni.Where(x => x.NIM == id).ToList();
-            if (detail == null)
+            Alumni cari = _alumniService.AmbilAlumniBerdasarkanId(id);
+
+            if (cari != null)
             {
-                return NotFound();
+                return View(cari);
             }
-            ViewBag.details = detail;
-            return View();
+            return NotFound();
         }
     }
 }

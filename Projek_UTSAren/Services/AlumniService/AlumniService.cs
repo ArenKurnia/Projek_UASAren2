@@ -11,19 +11,30 @@ namespace Projek_UTSAren.Services.AlumniService
     public class AlumniService : IAlumniService
     {
         private readonly IAlumniRepository _alumniRepository;
-        private readonly FileService _file;
-
-        public AlumniService(IAlumniRepository alumni, FileService f)
+        public AlumniService(IAlumniRepository alumni)
         {
             _alumniRepository = alumni;
-            _file = f;
         }
 
-        public bool CreateAlumni(Alumni alumni, IFormFile foto)
+        public Alumni AmbilAlumniBerdasarkanId(string id)
         {
-            alumni.Foto = _file.SimpanFile(foto).Result;
+            return _alumniRepository.AmbilAlumniBerdasarkanIdAsync(id).Result;
+        }
 
-            return _alumniRepository.CreateAlumniAsync(alumni, foto).Result;
+        public bool CreateAlumni(Alumni alumni)
+        { 
+            return _alumniRepository.CreateAlumniAsync(alumni).Result;
+        }
+
+        public bool HapusAlumni(string id)
+        {
+            var cari = _alumniRepository.CariAlumniAsync(id).Result;
+            return _alumniRepository.HapusAlumniAsync(cari).Result;
+        }
+
+        public bool UpdateAlumni(Alumni alumni)
+        { 
+            return _alumniRepository.UpdateAlumniAsync(alumni).Result;
         }
     }
 }

@@ -15,12 +15,6 @@ namespace Projek_UTSAren.Services.AlumniService
         {
             _alumniRepository = alumni;
         }
-
-        public Alumni AmbilAlumniBerdasarkanId(string id)
-        {
-            return _alumniRepository.AmbilAlumniBerdasarkanIdAsync(id).Result;
-        }
-
         public bool CreateAlumni(Alumni alumni)
         { 
             return _alumniRepository.CreateAlumniAsync(alumni).Result;

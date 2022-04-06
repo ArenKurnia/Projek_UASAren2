@@ -1,44 +1,37 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Projek_UTSAren.Data;
-using Projek_UTSAren.Helper;
 using Projek_UTSAren.Models;
-using Projek_UTSAren.Services;
-using Projek_UTSAren.Services.AlumniService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Projek_UTSAren.Controllers
+namespace Projek_UTSAren.Areas.Admin.Controllers
 {
-    public class AlumniController : Controller
+    [Area("Admin")]
+    public class EventController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IAlumniService _alumniService;
-        public AlumniController(AppDbContext context, IAlumniService alumni)
+        public EventController(AppDbContext context)
         {
             _context = context;
-            _alumniService = alumni;
         }
         public IActionResult Index()
         {
-            var data = _context.Tb_Alumni.ToList();
-            return View(data);
+            var data2 = _context.Tb_Event.ToList();
+            return View(data2);
         }
-
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Alumni parameter)
+        public async Task<IActionResult> Create(Event parameter)
         {
             if (ModelState.IsValid)
             {
-                _alumniService.CreateAlumni(parameter);
+                _context.Add(parameter);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("Index");
             }
@@ -50,7 +43,7 @@ namespace Projek_UTSAren.Controllers
             {
                 return NotFound();
             }
-            var ubah = await _context.Tb_Alumni.FindAsync(id);
+            var ubah = await _context.Tb_Event.FindAsync(id);
             if (ubah == null)
             {
                 return NotFound();
@@ -58,7 +51,7 @@ namespace Projek_UTSAren.Controllers
             return View(ubah);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Alumni ubah)
+        public async Task<IActionResult> Update(Event ubah)
         {
             if (ModelState.IsValid)
             {
@@ -77,25 +70,23 @@ namespace Projek_UTSAren.Controllers
         }
         public async Task<IActionResult> Delete(string id)
         {
-            var cari = _context.Tb_Alumni.Where(x => x.NIM == id).FirstOrDefault();
+            var cari = _context.Tb_Event.Where(x => x.Id_event == id).FirstOrDefault();
             if (cari == null)
             {
                 return NotFound();
             }
-            _context.Tb_Alumni.Remove(cari);
+            _context.Tb_Event.Remove(cari);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
         public IActionResult Detail(string id)
         {
-            var details = new List<Models.Alumni>();
-            var detail = _context.Tb_Alumni.Where(x => x.NIM == id).ToList();
-
+            var details = new List<Models.Event>();
+            var detail = _context.Tb_Event.Where(x => x.Id_event == id).ToList();
             if (detail == null)
             {
                 return NotFound();
-                
             }
             ViewBag.details = detail;
             return View();

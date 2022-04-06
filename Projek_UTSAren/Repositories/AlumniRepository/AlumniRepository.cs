@@ -13,16 +13,9 @@ namespace Projek_UTSAren.Repositories.AlumniRepository
     public class AlumniRepository : IAlumniRepository
     {
         private readonly AppDbContext _context;
-        private readonly AlumniRepository _alumniRepository;
-
-        public AlumniRepository(AppDbContext context, AlumniRepository alumni)
+        public AlumniRepository(AppDbContext context)
         {
-            _context = context;
-            _alumniRepository = alumni;
-        }
-        public async Task<Alumni> AmbilAlumniBerdasarkanIdAsync(string id)
-        {
-            return await _context.Tb_Alumni.FirstOrDefaultAsync(x => x.NIM == id);
+            _context = context;        
         }
         public async Task<bool> CreateAlumniAsync(Alumni alumni)
         {

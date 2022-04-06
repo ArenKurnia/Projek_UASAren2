@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Projek_UTSAren.Repositories.TahunRepository
 {
-    public class TahunRepository
+    public class TahunRepository : ITahunRepository
     {
     }
 }

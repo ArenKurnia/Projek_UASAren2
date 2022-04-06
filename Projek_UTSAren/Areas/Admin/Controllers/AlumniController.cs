@@ -1,19 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Projek_UTSAren.Data;
-using Projek_UTSAren.Helper;
 using Projek_UTSAren.Models;
-using Projek_UTSAren.Services;
 using Projek_UTSAren.Services.AlumniService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Projek_UTSAren.Controllers
+namespace Projek_UTSAren.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AlumniController : Controller
     {
         private readonly AppDbContext _context;
@@ -95,7 +91,7 @@ namespace Projek_UTSAren.Controllers
             if (detail == null)
             {
                 return NotFound();
-                
+
             }
             ViewBag.details = detail;
             return View();

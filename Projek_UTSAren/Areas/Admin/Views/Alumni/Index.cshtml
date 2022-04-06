@@ -80,9 +80,9 @@
                         @Html.DisplayFor(modelItem => item.Telp)
                     </td>
                     <td>
-                        <a asp-action="Update" asp-route-id="@item.NIM">Edit</a> |
-                        <a asp-action="Detail" asp-route-id="@item.NIM">Detail</a> |
-                        <a asp-action="Delete" asp-route-id="@item.NIM" style="color:black"
+                        <a asp-area="Admin" asp-action="Update" asp-route-id="@item.NIM">Edit</a> |
+                        <a asp-area="Admin" asp-action="Detail" asp-route-id="@item.NIM">Detail</a> |
+                        <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.NIM" style="color:black"
                            onclick="if (!confirm('Yakin Ingin Hapus?')) { return false;}">Hapus</a>
                     </td>
                 </tr>}

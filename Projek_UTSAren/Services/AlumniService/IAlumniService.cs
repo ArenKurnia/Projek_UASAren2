@@ -12,6 +12,5 @@ namespace Projek_UTSAren.Services.AlumniService
         bool CreateAlumni(Alumni alumni);
         bool UpdateAlumni(Alumni alumni);
         bool HapusAlumni(string id);
-        Alumni AmbilAlumniBerdasarkanId(string id);
     }
 }

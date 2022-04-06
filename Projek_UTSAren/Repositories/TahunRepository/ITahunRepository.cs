@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Projek_UTSAren.Repositories.TahunRepository
 {
-    interface ITahunRepository
+    public interface ITahunRepository
     {
     }
 }

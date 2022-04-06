@@ -5,12 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Projek_UTSAren.Data;
+using Projek_UTSAren.Models;
 using Projek_UTSAren.Repositories.AlumniRepository;
+using Projek_UTSAren.Repositories.EventRepository;
+using Projek_UTSAren.Repositories.TahunRepository;
+using Projek_UTSAren.Services;
 using Projek_UTSAren.Services.AlumniService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Projek_UTSAren.Services.EventService;
+using Projek_UTSAren.Services.TahunService;
 
 namespace Projek_UTSAren
 {
@@ -23,7 +25,7 @@ namespace Projek_UTSAren
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        //This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(o =>
@@ -37,8 +39,17 @@ namespace Projek_UTSAren
                     options.LoginPath = "/Akun/Masuk";
                 });
 
-            services.AddScoped<IAlumniService, AlumniService>();
+           
             services.AddScoped<IAlumniRepository, AlumniRepository>();
+            services.AddScoped<IAlumniService, AlumniService>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ITahunRepository, TahunRepository>();
+            services.AddScoped<ITahunService, TahunService>();
+
+            services.AddTransient<EmailService>();
+
+            services.Configure<Email>(Configuration.GetSection("AturEmail"));
 
             services.AddControllersWithViews();
         }
@@ -64,6 +75,14 @@ namespace Projek_UTSAren
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "AreaAdmin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "AreaUser",
+                    areaName: "User",
+                    pattern: "User/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Akun}/{action=Masuk}/{id?}");

@@ -64,7 +64,7 @@ namespace Projek_UTSAren.Areas.Admin.Controllers
                 {
                     return NotFound(0);
                 }
-                return RedirectToAction("Index", "Alumni");
+                return RedirectToAction("Index", "Event");
             }
             return View(ubah);
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projek_UTSAren.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class TahunController : Controller
     {
         private readonly AppDbContext _context;
@@ -50,7 +51,7 @@ namespace Projek_UTSAren.Areas.Admin.Controllers
             return View(ubah);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Event ubah)
+        public async Task<IActionResult> Update(Tahun ubah)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +64,7 @@ namespace Projek_UTSAren.Areas.Admin.Controllers
                 {
                     return NotFound(0);
                 }
-                return RedirectToAction("Index", "Alumni");
+                return RedirectToAction("Index", "Tahun");
             }
             return View(ubah);
         }

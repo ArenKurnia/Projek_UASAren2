@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Event>
 
-@{ Layout = "_LayoutAdmin"; }
+@{ Layout = "_LayoutUser"; }
 
 @{ ViewData["Title"] = "Index"; }
 
 <br />
 <br />
-<p>
-    <a class="btn btn-info" asp-controller="Event" asp-action="Create">Tambah</a>
-</p>
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
@@ -79,12 +76,10 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            <a class="btn btn-dark" style="color:white" asp-action="Update" asp-route-id="@item.Id_event">Edit</a>
             <a class="btn btn-dark" style="color:white" asp-action="Detail" asp-route-id="@item.Id_event">Detail</a>
-            <a class="btn btn-dark" style="color:white" asp-action="Delete" asp-route-id="@item.Id_event" onclick="if (!confirm('Yakin Ingin Hapus?')) { return false;}">Hapus</a>
         </td>
     </tr>
-}
+    }
             </tbody>
         </table>
     </div>

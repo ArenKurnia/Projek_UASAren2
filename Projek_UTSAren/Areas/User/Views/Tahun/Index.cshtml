@@ -1,4 +1,4 @@
-﻿@{ Layout = "_LayoutAdmin"; }
+﻿@{ Layout = "_LayoutUser"; }
 
 @model IEnumerable<Tahun>
 
@@ -6,9 +6,6 @@
 
 <br />
 <br />
-<p>
-    <a class="btn btn-info" asp-controller="Tahun" asp-action="Create">Tambah</a>
-</p>
 
 <div class="card mb-4">
     <div class="card-header">
@@ -31,8 +28,8 @@
                 </tr>
             </thead>
             <tbody>
- @foreach (var item in Model)     
- {
+                @foreach (var item in Model)
+                {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Id_angkatan)
@@ -44,12 +41,9 @@
             @Html.DisplayFor(modelItem => item.Nama_angkatan)
         </td>
         <td>
-            <a class="btn btn-dark" style="color:white" asp-action="Update" asp-route-id="@item.Id_angkatan">Edit</a>
             <a class="btn btn-dark" style="color:white" asp-action="Detail" asp-route-id="@item.Id_angkatan">Detail</a>
-            <a class="btn btn-dark" style="color:white" asp-action="Delete" asp-route-id="@item.Id_angkatan" onclick="if (!confirm('Yakin Ingin Hapus?')) { return false;}">Hapus</a>
         </td>
-    </tr>
-}
+    </tr>}
             </tbody>
         </table>
     </div>

@@ -1,6 +1,6 @@
 ﻿@model List<Event>
 
-@{ Layout = "_LayoutAkun"; }
+@{ Layout = "_LayoutUser"; }
 
 <h1>Detail Data Event</h1>
 @foreach (var data in ViewBag.details)
@@ -14,10 +14,7 @@
     <p>Batas Daftar   : @data.Batas_daftar </p>
     <p>Keterangan     : @data.Keterangan </p>
     <p>Status         : @data.Status </p>
-    <br />
-    <br />
-    <a class="btn btn-dark" style="color:white" asp-action="Update" asp-route-id="@data.Id_event">Edit</a>
 }
 <br />
 <br />
-<a asp-action="Index">Kembali</a>
+<a class="btn btn-dark" style="color:white" asp-action="Index">Kembali</a>

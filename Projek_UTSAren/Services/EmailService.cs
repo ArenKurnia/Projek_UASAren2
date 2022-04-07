@@ -40,9 +40,9 @@ namespace Projek_UTSAren.Services
 
                 return true;
             }
-            catch(System.Exception e)
+            catch
             {
-                Console.WriteLine(e.Message); throw;
+                return false;
             }
         }
     }

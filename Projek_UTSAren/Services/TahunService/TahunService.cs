@@ -29,5 +29,9 @@ namespace Projek_UTSAren.Services.TahunService
         {
             return _tahunRepository.UpdateTahunAsync(parameter).Result;
         }
+        public List<Tahun> AmbilSemuaTahun()
+        {
+            return _tahunRepository.AmbilSemuaTahunAsync().Result;
+        }
     }
 }

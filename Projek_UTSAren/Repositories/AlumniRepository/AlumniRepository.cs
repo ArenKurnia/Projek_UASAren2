@@ -49,5 +49,15 @@ namespace Projek_UTSAren.Repositories.AlumniRepository
         {
             return await _context.Tb_Alumni.Include(x => x.Roles).FirstOrDefaultAsync(x => x.NIM == id);
         }
+
+        public async Task<List<Alumni>> AmbilSemuaAlumniAsync()
+        {
+            return await _context.Tb_Alumni.Include(x => x.Roles).ToListAsync();
+        }
+
+        public async Task<List<User>> AmbilSemuaUserAsync()
+        {
+            return await _context.Tb_User.Include(x => x.Roles).ToListAsync();
+        }
     }
 }

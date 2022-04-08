@@ -11,5 +11,7 @@ namespace Projek_UTSAren.Services.EventService
         bool CreateEvent(Event parameter);
         bool UpdateEvent(Event parameter);
         bool HapusEvent(string id);
+        List<Event> AmbilSemuaEvent();
+
     }
 }

@@ -42,5 +42,9 @@ namespace Projek_UTSAren.Repositories.TahunRepository
 
             return true;
         }
+        public async Task<List<Tahun>> AmbilSemuaTahunAsync()
+        {
+            return await _context.Tb_Tahun.Include(x => x.Id_angkatan).ToListAsync();
+        }
     }
 }

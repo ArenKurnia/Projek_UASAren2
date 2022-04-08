@@ -12,5 +12,7 @@ namespace Projek_UTSAren.Repositories.EventRepository
         Task<bool> UpdateEventAsync(Event parameter);
         Task<bool> HapusEventAsync(Event parameter);
         Task<Event> CariEventAsync(string id);
+        Task<List<Event>> AmbilSemuaEventAsync();
+
     }
 }

@@ -14,6 +14,7 @@ namespace Projek_UTSAren.Services.EventService
         {
             _eventRepository = parameter;
         }
+
         public bool CreateEvent(Event parameter)
         {
             return _eventRepository.CreateEventAsync(parameter).Result;
@@ -28,6 +29,10 @@ namespace Projek_UTSAren.Services.EventService
         public bool UpdateEvent(Event parameter)
         {
             return _eventRepository.UpdateEventAsync(parameter).Result;
+        }
+        public List<Event> AmbilSemuaEvent()
+        {
+            return _eventRepository.AmbilSemuaEventAsync().Result;
         }
     }
 }

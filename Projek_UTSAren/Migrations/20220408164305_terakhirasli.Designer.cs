@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projek_UTSAren.Data;
 
 namespace Projek_UTSAren.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220408164305_terakhirasli")]
+    partial class terakhirasli
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,16 +131,11 @@ namespace Projek_UTSAren.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("RolesId")
-                        .HasColumnType("varchar(767)");
-
                     b.Property<string>("Tahun_angkatan")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id_angkatan");
-
-                    b.HasIndex("RolesId");
 
                     b.ToTable("Tb_Tahun");
                 });
@@ -190,11 +187,13 @@ namespace Projek_UTSAren.Migrations
 
             modelBuilder.Entity("Projek_UTSAren.Models.Tahun", b =>
                 {
-                    b.HasOne("Projek_UTSAren.Models.Roles", "Roles")
+                    b.HasOne("Projek_UTSAren.Models.Event", "Nama_event")
                         .WithMany()
-                        .HasForeignKey("RolesId");
+                        .HasForeignKey("Id_angkatan")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Roles");
+                    b.Navigation("Nama_event");
                 });
 
             modelBuilder.Entity("Projek_UTSAren.Models.User", b =>

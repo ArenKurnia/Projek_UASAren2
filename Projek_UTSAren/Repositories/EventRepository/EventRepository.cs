@@ -42,5 +42,9 @@ namespace Projek_UTSAren.Repositories.EventRepository
 
             return true;
         }
+        public async Task<List<Event>> AmbilSemuaEventAsync()
+        {
+            return await _context.Tb_Event.Include(x => x.Nama_angkatan).ToListAsync();
+        }
     }
 }

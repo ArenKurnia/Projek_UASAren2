@@ -12,5 +12,7 @@ namespace Projek_UTSAren.Repositories.TahunRepository
         Task<bool> UpdateTahunAsync(Tahun parameter);
         Task<bool> HapusTahunAsync(Tahun parameter);
         Task<Tahun> CariTahunAsync(string id);
+        Task<List<Tahun>> AmbilSemuaTahunAsync();
+
     }
 }

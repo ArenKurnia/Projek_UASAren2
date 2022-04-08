@@ -11,5 +11,7 @@ namespace Projek_UTSAren.Services.TahunService
         bool CreateTahun(Tahun parameter);
         bool UpdateTahun(Tahun parameter);
         bool HapusTahun(string id);
+        List<Tahun> AmbilSemuaTahun();
+
     }
 }

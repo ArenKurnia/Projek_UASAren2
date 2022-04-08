@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projek_UTSAren.Data;
 
 namespace Projek_UTSAren.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220408163940_terakhirbgt")]
+    partial class terakhirbgt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,7 +104,8 @@ namespace Projek_UTSAren.Migrations
 
                     b.HasKey("Id_event");
 
-                    b.HasIndex("Id_angkatan");
+                    b.HasIndex("Id_angkatan")
+                        .IsUnique();
 
                     b.ToTable("Tb_Event");
                 });
@@ -129,16 +132,11 @@ namespace Projek_UTSAren.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("RolesId")
-                        .HasColumnType("varchar(767)");
-
                     b.Property<string>("Tahun_angkatan")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id_angkatan");
-
-                    b.HasIndex("RolesId");
 
                     b.ToTable("Tb_Tahun");
                 });
@@ -182,19 +180,10 @@ namespace Projek_UTSAren.Migrations
             modelBuilder.Entity("Projek_UTSAren.Models.Event", b =>
                 {
                     b.HasOne("Projek_UTSAren.Models.Tahun", "Nama_angkatan")
-                        .WithMany()
-                        .HasForeignKey("Id_angkatan");
+                        .WithOne("Id_event")
+                        .HasForeignKey("Projek_UTSAren.Models.Event", "Id_angkatan");
 
                     b.Navigation("Nama_angkatan");
-                });
-
-            modelBuilder.Entity("Projek_UTSAren.Models.Tahun", b =>
-                {
-                    b.HasOne("Projek_UTSAren.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId");
-
-                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("Projek_UTSAren.Models.User", b =>
@@ -204,6 +193,11 @@ namespace Projek_UTSAren.Migrations
                         .HasForeignKey("RolesId");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("Projek_UTSAren.Models.Tahun", b =>
+                {
+                    b.Navigation("Id_event");
                 });
 #pragma warning restore 612, 618
         }

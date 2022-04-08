@@ -30,4 +30,5 @@ namespace Projek_UTSAren.Models
         public string Foto { get; set; }
         public Roles Roles { get; set; }
     }
+
 }

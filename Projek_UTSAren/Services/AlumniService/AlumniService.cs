@@ -24,6 +24,16 @@ namespace Projek_UTSAren.Services.AlumniService
             return _alumniRepository.AmbilAlumniBerdasarkanIdAsync(id).Result;
         }
 
+        public List<Alumni> AmbilSemuaAlumni()
+        {
+            return _alumniRepository.AmbilSemuaAlumniAsync().Result;
+        }
+
+        public List<User> AmbilSemuaUser()
+        {
+            return _alumniRepository.AmbilSemuaUserAsync().Result;
+        }
+
         public bool CreateAlumni(Alumni alumni, IFormFile Image)
         {
             alumni.Foto = _file.SimpanFile(Image).Result;

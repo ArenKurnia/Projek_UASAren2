@@ -26,8 +26,6 @@ namespace Projek_UTSAren.Models
         public string Keterangan { get; set; }
         [Required]
         public string Status { get; set; }
-
-        [ForeignKey("Id_angkatan")]
-        public Tahun Nama_angkatan { get; set; }
+        public Roles Roles { get; set; }
     }
 }

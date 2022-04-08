@@ -15,5 +15,8 @@ namespace Projek_UTSAren.Repositories.AlumniRepository
         Task<bool> HapusAlumniAsync(Alumni alumni);
         Task<Alumni> CariAlumniAsync(string id);
         Task<Alumni> AmbilAlumniBerdasarkanIdAsync(string id);
+        Task<List<Alumni>> AmbilSemuaAlumniAsync();
+        Task<List<User>> AmbilSemuaUserAsync();
+
     }
 }

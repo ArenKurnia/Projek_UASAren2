@@ -9,8 +9,10 @@ namespace Projek_UTSAren.Services.AlumniService
 {
     public interface IAlumniService
     {
-        bool CreateAlumni(Alumni alumni);
-        bool UpdateAlumni(Alumni alumni);
+        bool CreateAlumni(Alumni alumni, IFormFile Image);
+        bool UpdateAlumni(Alumni alumni, IFormFile Image);
         bool HapusAlumni(string id);
+        Alumni AmbilAlumniBerdasarkanId(string id);
+
     }
 }

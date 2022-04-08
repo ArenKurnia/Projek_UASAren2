@@ -48,6 +48,7 @@ namespace Projek_UTSAren
             services.AddScoped<ITahunService, TahunService>();
 
             services.AddTransient<EmailService>();
+            services.AddTransient<FileService>();
 
             services.Configure<Email>(Configuration.GetSection("AturEmail"));
 

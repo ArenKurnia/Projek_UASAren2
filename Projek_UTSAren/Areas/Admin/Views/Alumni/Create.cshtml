@@ -4,13 +4,13 @@
     Layout = "_LayoutAkun";
 }
 
-<h1 style="text-align:center">Tambah</h1>
+<h2 style="text-align:center">Tambah</h2>
 
 <h4 style="text-align:center">Data Alumni</h4>
 <hr />
 <div class="row">
     <div class="card-body">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="NIM" class="control-label"></label>
                 <input asp-for="NIM" class="form-control" />
@@ -58,20 +58,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Foto"></label>
-                <input type="file" name="Foto" accept=".jpg,.png" class="form-control" multiple />
+                <input type="file" name="Foto" accept=".jpg,.png,.jpeg" class="form-control" multiple />
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Simpan" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
-    <a asp-area="Admin" asp-action="Index">Kembali</a>
+    <a class="btn btn-dark" style="color:white" asp-area="Admin" asp-action="Index">Kembali</a>
 </div>
-<br />
 <br />
 <br />
 

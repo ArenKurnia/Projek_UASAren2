@@ -44,5 +44,10 @@ namespace Projek_UTSAren.Repositories.AlumniRepository
 
             return true;
         }
+
+        public async Task<Alumni> AmbilAlumniBerdasarkanIdAsync(string id)
+        {
+            return await _context.Tb_Alumni.Include(x => x.Roles).FirstOrDefaultAsync(x => x.NIM == id);
+        }
     }
 }

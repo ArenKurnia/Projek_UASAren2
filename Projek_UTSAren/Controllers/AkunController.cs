@@ -118,6 +118,8 @@ namespace Projek_UTSAren.Controllers
             await HttpContext.SignOutAsync();
             return Redirect("/");
         }
+
+
         [HttpPost]
         public object KirimEmailOTP(string emailTujuan)
         {

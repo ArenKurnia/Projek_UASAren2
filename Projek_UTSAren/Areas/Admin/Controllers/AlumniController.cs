@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Projek_UTSAren.Data;
 using Projek_UTSAren.Models;
 using Projek_UTSAren.Services.AlumniService;
@@ -30,47 +31,44 @@ namespace Projek_UTSAren.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Alumni parameter)
+        public IActionResult Create(Alumni parameter, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
-                _alumniService.CreateAlumni(parameter);
+                _alumniService.CreateAlumni(parameter, Image);
 
                 return RedirectToAction("Index");
             }
             return View(parameter);
         }
-        public async Task<IActionResult> Update(string id)
+        public IActionResult Update(string id)
         {
-            if (id == null)
+            var cari = _alumniService.AmbilAlumniBerdasarkanId(id);
+
+            if (cari != null)
             {
-                return NotFound();
+                return View(cari);
             }
-            var ubah = await _context.Tb_Alumni.FindAsync(id);
-            if (ubah == null)
-            {
-                return NotFound();
-            }
-            return View(ubah);
+            return NotFound();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Update(Alumni ubah)
+        public IActionResult Update(Alumni ubah, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
-                try
+                var cari = _alumniService.AmbilAlumniBerdasarkanId(ubah.NIM);
+                if (cari != null)
                 {
-                    _context.Update(ubah);
-                    await _context.SaveChangesAsync();
+                    _alumniService.UpdateAlumni(ubah, Image);
+                    return Redirect("/Admin/Alumni/Detail/" + ubah.NIM);
+
                 }
-                catch
-                {
-                    return NotFound(0);
-                }
-                return RedirectToAction("Index", "Alumni");
+                return NotFound(0);
             }
             return View(ubah);
         }
+
         public async Task<IActionResult> Delete(string id)
         {
             var cari = _context.Tb_Alumni.Where(x => x.NIM == id).FirstOrDefault();
@@ -85,16 +83,13 @@ namespace Projek_UTSAren.Areas.Admin.Controllers
         }
         public IActionResult Detail(string id)
         {
-            var details = new List<Models.Alumni>();
-            var detail = _context.Tb_Alumni.Where(x => x.NIM == id).ToList();
+            Alumni cari = _alumniService.AmbilAlumniBerdasarkanId(id);
 
-            if (detail == null)
+            if (cari != null)
             {
-                return NotFound();
-
+                return View(cari);
             }
-            ViewBag.details = detail;
-            return View();
+            return NotFound();
         }
     }
 }

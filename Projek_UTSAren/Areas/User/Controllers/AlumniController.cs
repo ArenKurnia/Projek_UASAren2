@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projek_UTSAren.Data;
+using Projek_UTSAren.Models;
 using Projek_UTSAren.Services.AlumniService;
 using System;
 using System.Collections.Generic;
@@ -25,16 +26,13 @@ namespace Projek_UTSAren.Areas.User.Controllers
         }
         public IActionResult Detail(string id)
         {
-            var details = new List<Models.Alumni>();
-            var detail = _context.Tb_Alumni.Where(x => x.NIM == id).ToList();
+            Alumni cari = _alumniService.AmbilAlumniBerdasarkanId(id);
 
-            if (detail == null)
+            if (cari != null)
             {
-                return NotFound();
-
+                return View(cari);
             }
-            ViewBag.details = detail;
-            return View();
+            return NotFound();
         }
     }
 }

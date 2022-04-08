@@ -11,12 +11,22 @@ namespace Projek_UTSAren.Services.AlumniService
     public class AlumniService : IAlumniService
     {
         private readonly IAlumniRepository _alumniRepository;
-        public AlumniService(IAlumniRepository alumni)
+        private readonly FileService _file;
+
+        public AlumniService(IAlumniRepository alumni, FileService f)
         {
             _alumniRepository = alumni;
+            _file = f;
         }
-        public bool CreateAlumni(Alumni alumni)
-        { 
+
+        public Alumni AmbilAlumniBerdasarkanId(string id)
+        {
+            return _alumniRepository.AmbilAlumniBerdasarkanIdAsync(id).Result;
+        }
+
+        public bool CreateAlumni(Alumni alumni, IFormFile Image)
+        {
+            alumni.Foto = _file.SimpanFile(Image).Result;
             return _alumniRepository.CreateAlumniAsync(alumni).Result;
         }
 
@@ -26,9 +36,26 @@ namespace Projek_UTSAren.Services.AlumniService
             return _alumniRepository.HapusAlumniAsync(cari).Result;
         }
 
-        public bool UpdateAlumni(Alumni alumni)
-        { 
-            return _alumniRepository.UpdateAlumniAsync(alumni).Result;
+        public bool UpdateAlumni(Alumni alumni, IFormFile Image)
+        {
+            var cari = _alumniRepository.CariAlumniAsync(alumni.NIM).Result;
+            if(cari!= null)
+            {
+                cari.Nama_alumni = alumni.Nama_alumni;
+                cari.Tahun_angkatan = alumni.Tahun_angkatan;
+                cari.Jenis_kelamin = alumni.Jenis_kelamin;
+                cari.Tempat_lahir = alumni.Tempat_lahir;
+                cari.Tanggal_lahir = alumni.Tanggal_lahir;
+                cari.Pekerjaan = alumni.Pekerjaan;
+                cari.Alamat = alumni.Alamat;
+                cari.Telp = alumni.Telp;
+
+                if (Image != null) cari.Foto = _file.SimpanFile(Image).Result;
+                else cari.Foto = cari.Foto;
+                return _alumniRepository.UpdateAlumniAsync(cari).Result;
+            }
+            return false;
         }
+
     }
 }

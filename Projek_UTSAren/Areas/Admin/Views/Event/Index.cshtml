@@ -79,9 +79,9 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            <a class="btn btn-dark" style="color:white" asp-action="Update" asp-route-id="@item.Id_event">Edit</a>
+            <a class="btn btn-info" style="color:white" asp-action="Update" asp-route-id="@item.Id_event">Edit</a>
             <a class="btn btn-dark" style="color:white" asp-action="Detail" asp-route-id="@item.Id_event">Detail</a>
-            <a class="btn btn-dark" style="color:white" asp-action="Delete" asp-route-id="@item.Id_event" onclick="if (!confirm('Yakin Ingin Hapus?')) { return false;}">Hapus</a>
+            <a class="btn btn-info" style="background-color:red" asp-action="Delete" asp-route-id="@item.Id_event" onclick="if (!confirm('Yakin Ingin Hapus?')) { return false;}">Hapus</a>
         </td>
     </tr>
 }
